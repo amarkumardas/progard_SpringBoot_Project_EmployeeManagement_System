@@ -1,10 +1,8 @@
 package com.amar.employeemanagemetsystem.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,12 +33,13 @@ public class Employee implements UserDetails {
     @Column(nullable = false)
     @NotBlank(message = "Password is mandatory")
     @Size(min=3,max = 256,message = "Password must be minimum of 3 characters and maximum of 256 characters")
-   // @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",message = "Password must be minimum eight characters, at least one letter and one number:")
-    private String password;
+     private String password;
+
     @NotNull(message = "Organization id is missing")
     @ManyToOne
     private  Organization fk_orgobj;
 
+    @JsonIgnore/////////
     @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)//data will be loaded on the spot
     @JoinTable(name="role_assign",joinColumns = @JoinColumn(name="Employee",referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name="Role",referencedColumnName = "id"))
     private Set<Role> roles=new HashSet<>();

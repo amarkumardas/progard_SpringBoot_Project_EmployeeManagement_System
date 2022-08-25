@@ -1,14 +1,13 @@
 package com.amar.employeemanagemetsystem.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
 
 import javax.persistence.*;
-
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,6 +23,7 @@ public class Asset {
     private int noOfComputers;
     @ManyToOne
     @NotNull(message = "Organization id is missing")
+   // @JsonIgnore
     private  Organization fk_org_obj;
 
 }

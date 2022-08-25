@@ -1,18 +1,30 @@
 package com.amar.employeemanagemetsystem.service;
 
 import com.amar.employeemanagemetsystem.models.Employee;
+import com.amar.employeemanagemetsystem.models.Organization;
+import com.amar.employeemanagemetsystem.models.Role;
 import com.amar.employeemanagemetsystem.repository.EmployeeRepo;
+import com.amar.employeemanagemetsystem.repository.OrganizationRepo;
+import com.amar.employeemanagemetsystem.repository.RoleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
     @Autowired
     private EmployeeRepo employeeRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private OrganizationRepo organizationRepo;
+    @Autowired
+    private RoleRepo roleRepo;
 
     public EmployeeServiceImpl(EmployeeRepo employeeRepo) {
         this.employeeRepo = employeeRepo;
@@ -21,7 +33,39 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public Employee saveEmployee(Employee employee) {
         employee.setPassword(this.passwordEncoder.encode(employee.getPassword()));//encrypting password and storing in db
-        return employeeRepo.save(employee);
+
+        List<Employee> emp=employeeRepo.findAll();
+        if (!emp.isEmpty()){//if employee available then make role as employee
+            Role roles=roleRepo.findById(3).orElseThrow();
+            Set<Role> roleObj=new HashSet<>();
+            roleObj.add(roles);
+            employee.setRoles(roleObj);
+            return employeeRepo.save(employee);
+        }
+        else {//if employee not available then make role as admin
+            Role roleobj1=new Role();
+            roleobj1.setRoleName("admin");
+            roleRepo.save(roleobj1);
+
+            Role roleobj2=new Role();
+            roleobj2.setRoleName("manager");
+            roleRepo.save(roleobj2);
+
+            Role roleobj3=new Role();
+            roleobj3.setRoleName("employee");
+            roleRepo.save(roleobj3);
+
+             Organization orgObj=new Organization();
+             orgObj.setOrganizationName("defaultOrg");
+             organizationRepo.save(orgObj);
+
+            Role roles=roleRepo.findById(1).orElseThrow();//by default first employee role is admin
+            Set<Role> roleObj=new HashSet<>();
+            roleObj.add(roles);
+            employee.setRoles(roleObj);
+            return employeeRepo.save(employee);
+        }
+
     }
 
     @Override
@@ -45,7 +89,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
     @Override
     public void deleteEmployee(int id) {
-          employeeRepo.findById(id).orElseThrow();
+          Employee obj=employeeRepo.findById(id).orElseThrow();
+          obj.getRoles().clear();//first clear role before delete due to foreign ket constraint
          employeeRepo.deleteById(id);
     }
 }

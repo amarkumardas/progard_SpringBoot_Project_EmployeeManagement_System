@@ -15,10 +15,6 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
-
-//    EmployeeController(EmployeeService employeeService){
-//        this.employeeService=employeeService;
-//    }
     @PostMapping//it should be always above THE method ie. AT METHOD LEVEL . it is used for creation
     public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee){//ResponseEntity represents Http response including headers,body,status.we will get data in the form of ResponseEntity
         return new ResponseEntity<Employee>( employeeService.saveEmployee(employee), HttpStatus.CREATED);//here we are creating and saving data in db
@@ -43,5 +39,4 @@ public class EmployeeController {
        return new ResponseEntity<String>("Employee data deleted successfully",HttpStatus.OK);
 
     }
-
 }

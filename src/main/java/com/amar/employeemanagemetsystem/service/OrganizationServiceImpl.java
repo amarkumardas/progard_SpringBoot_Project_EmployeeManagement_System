@@ -1,5 +1,6 @@
 package com.amar.employeemanagemetsystem.service;
 
+import com.amar.employeemanagemetsystem.models.Employee;
 import com.amar.employeemanagemetsystem.models.Organization;
 import com.amar.employeemanagemetsystem.repository.OrganizationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,12 @@ public class OrganizationServiceImpl implements OrganizationService{
 
     @Override
     public void deleteOrganization(int id) {
-    organizationRepo.findById(id).orElseThrow();
+     Organization obj=organizationRepo.findById(id).orElseThrow();
+     List<Employee> emp=obj.getEmployee();
+        for (int i=0; i<emp.size(); i++){//deleting employee role first due to foreign key
+            Employee empObj=emp.get(i);
+            empObj.getRoles().clear();
+        }
     organizationRepo.deleteById(id);
     }
 }

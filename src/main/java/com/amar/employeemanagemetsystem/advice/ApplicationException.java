@@ -21,6 +21,7 @@ public class ApplicationException{
          ex.getBindingResult().getFieldErrors().stream().forEach(error->{
              errorMap.put(error.getField(),error.getDefaultMessage());//error.getField() return issue
          });
+        System.out.println(ex.getLocalizedMessage());
          return errorMap;
      }
 
@@ -29,7 +30,8 @@ public class ApplicationException{
     public Map<String,String> handleInavalidArgument(java.sql.SQLIntegrityConstraintViolationException ex){
         //logic for better readable
         Map<String,String> errorMap=new HashMap<>();
-        errorMap.put("id","Invalid Id");//error.getField() return issue
+        errorMap.put("error","SQLIntegrityConstraintViolation");//error.getField() return issue
+        System.out.println(ex.getLocalizedMessage());
         return errorMap;
     }
 
@@ -39,6 +41,7 @@ public class ApplicationException{
         //logic for better readable
         Map<String,String> errorMap=new HashMap<>();
         errorMap.put("errorMessage","id not present");//error.getField() return issue
+        System.out.println(ex.getLocalizedMessage());
         return errorMap;
     }
 

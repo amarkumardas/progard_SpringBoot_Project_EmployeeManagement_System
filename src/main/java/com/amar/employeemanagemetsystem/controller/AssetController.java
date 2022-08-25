@@ -38,6 +38,6 @@ public class AssetController {
     @DeleteMapping("deletebyid/{id}")
     public ResponseEntity<String> deleteAsset(@PathVariable("id")int id){
         assetService.deleteAsset(id);
-        return new ResponseEntity<String>("Customer data deleted successfully",HttpStatus.OK);
+        return new ResponseEntity<String>("Asset data deleted successfully",HttpStatus.OK);
     }
 }
