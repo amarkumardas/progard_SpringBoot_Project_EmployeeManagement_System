@@ -45,4 +45,14 @@ public class ApplicationException{
         return errorMap;
     }
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(CannotAccessId.class)//whenever this exception occur then this annotation tells to springboot to redirect to this method
+    public Map<String,String> handleInavalidArgument(CannotAccessId ex){
+        //logic for better readable
+        Map<String,String> errorMap=new HashMap<>();
+        errorMap.put("errorMessage","Cannot see other employee Details");//error.getField() return issue
+        System.out.println(ex.getLocalizedMessage());
+        return errorMap;
+    }
+
 }

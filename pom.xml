@@ -2,18 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
+	<parent><!--current springboot project inherited from Maven central repository from line 5 to 10.it has lots of common things that are required to build springboot application -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.amar</groupId>
+	<groupId>com.amar</groupId><!--current springboot project details from line 11 to 15-->
 	<artifactId>EmployeeManagemetSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>EmployeeManagemetSystem</name>
 	<description> employee management project for Spring Boot</description>
-	<properties>
+	<properties><!--overriding of some properties values that are collected from of parent project from line 16 to 18-->
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
@@ -71,7 +71,7 @@
 
 	</dependencies>
 
-	<build>
+	<build><!--additional Maven plugins from line 74 to 89-->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

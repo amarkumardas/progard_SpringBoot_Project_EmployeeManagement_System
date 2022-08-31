@@ -28,9 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests()
                 .antMatchers("/api/emp/").permitAll()
                 //employee view
-                .antMatchers("/api/emp/getbyid/{id}","/api/org/getall","/api/asset/getall").hasAnyAuthority("employee","admin","manager")//***if there is two same api then first api will be access first by role
+                .antMatchers("/api/emp/getbyid/{id}").hasAnyAuthority("employee","admin","manager")//***if there is two same api then first api will be access first by role
                 //view
-                .antMatchers("/api/emp/getall","/api/emp/getbyid/*","/api/asset/getbyid/*","/api/asset/getall","/api/org/getbyid/*","/api/org/getall").hasAnyAuthority("manager","admin")
+                .antMatchers("/api/emp/getall","/api/asset/getbyid/*","/api/asset/getall","/api/org/getbyid/*","/api/org/getall").hasAnyAuthority("manager","admin")
                 //update
                 .antMatchers("/api/emp/updatebyid/*","/api/asset/updatebyid/*","/api/org/updatebyid/*").hasAnyAuthority("manager","admin")
                 //post
