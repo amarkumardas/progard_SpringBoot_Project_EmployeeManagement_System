@@ -19,7 +19,7 @@ public class Asset {
     @GeneratedValue(strategy= GenerationType.AUTO)//GenerationType.Identity does not create any additional sequence tables like GenerationType.AUTO
     private int id;
     @Column(nullable = false)
-    @Range(min = 1,message = "Number of computer must be greater than 1")
+    @Range(min = 1,message = "Numbers of computer must be greater than 1")
     private int noOfComputers;
     @ManyToOne
     @NotNull(message = "Organization id is missing")

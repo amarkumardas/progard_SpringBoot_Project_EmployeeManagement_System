@@ -39,11 +39,10 @@ public class Employee implements UserDetails {
     @ManyToOne
     private  Organization fk_orgobj;
 
-    @JsonIgnore/////////
+    @JsonIgnore
     @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)//data will be loaded on the spot
     @JoinTable(name="role_assign",joinColumns = @JoinColumn(name="Employee",referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name="Role",referencedColumnName = "id"))
     private Set<Role> roles=new HashSet<>();
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { //return the authority granted to the user

@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -66,6 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService{
             return employeeRepo.save(employee);
         }
 
+
     }
 
     @Override
@@ -84,6 +82,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         existingEmployee.setEmail(employee.getEmail());
         existingEmployee.setPassword(this.passwordEncoder.encode(employee.getPassword()));//encrypting password and storing in dbemployee.getPassword());
         existingEmployee.setName(employee.getName());
+        existingEmployee.setFk_orgobj(employee.getFk_orgobj());
         employeeRepo.save(existingEmployee);
         return existingEmployee;
     }

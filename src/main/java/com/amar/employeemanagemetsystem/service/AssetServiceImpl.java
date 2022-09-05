@@ -37,6 +37,7 @@ public class AssetServiceImpl implements AssetService{
     public Asset updateAsset(Asset asset, int id) {
         Asset existingAsset=assetRepo.findById(id).orElseThrow();
         existingAsset.setNoOfComputers(asset.getNoOfComputers());
+        existingAsset.setFk_org_obj(asset.getFk_org_obj());
         assetRepo.save(existingAsset);
         return existingAsset;
     }

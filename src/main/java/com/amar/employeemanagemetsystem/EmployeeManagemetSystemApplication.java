@@ -17,7 +17,7 @@ public class EmployeeManagemetSystemApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(this.passwordEncoder.encode("12345qwer"));
+		System.out.println(this.passwordEncoder.encode("abc"));
 
 	}
 }

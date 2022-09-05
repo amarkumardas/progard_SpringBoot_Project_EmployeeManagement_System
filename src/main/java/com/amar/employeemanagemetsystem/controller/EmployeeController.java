@@ -2,7 +2,6 @@ package com.amar.employeemanagemetsystem.controller;
 
 import com.amar.employeemanagemetsystem.advice.CannotAccessId;
 import com.amar.employeemanagemetsystem.models.Employee;
-import com.amar.employeemanagemetsystem.models.Role;
 import com.amar.employeemanagemetsystem.repository.EmployeeRepo;
 import com.amar.employeemanagemetsystem.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
