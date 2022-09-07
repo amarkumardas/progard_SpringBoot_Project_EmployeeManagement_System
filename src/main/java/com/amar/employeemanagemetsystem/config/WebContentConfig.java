@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebContentConfig implements WebMvcConfigurer {
     @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-         configurer.defaultContentType(MediaType.APPLICATION_XML);
+    public void configureContentNegotiation(ContentNegotiationConfigurer configure) {
+         configure.defaultContentType(MediaType.APPLICATION_XML);
     }
 }

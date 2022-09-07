@@ -18,7 +18,7 @@ public class ApplicationException{
        //logic for better readable
          Map<String,String> errorMap=new HashMap<>();
          //getting all errors and converted to list by this method getFieldErrors()
-         ex.getBindingResult().getFieldErrors().stream().forEach(error->{
+         ex.getBindingResult().getFieldErrors().forEach(error->{
              errorMap.put(error.getField(),error.getDefaultMessage());//error.getField() return issue
          });
         System.out.println(ex.getLocalizedMessage());
@@ -51,6 +51,16 @@ public class ApplicationException{
         //logic for better readable
         Map<String,String> errorMap=new HashMap<>();
         errorMap.put("errorMessage","Cannot see other employee Details");//error.getField() return issue
+        System.out.println(ex.getLocalizedMessage());
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(org.hibernate.TransientPropertyValueException.class)//whenever this exception occur then this annotation tells to springboot to redirect to this method
+    public Map<String,String> handleInavalidArgument(org.hibernate.TransientPropertyValueException ex){
+        //logic for better readable
+        Map<String,String> errorMap=new HashMap<>();
+        errorMap.put("error","Organization id is missing");//error.getField() return issue
         System.out.println(ex.getLocalizedMessage());
         return errorMap;
     }

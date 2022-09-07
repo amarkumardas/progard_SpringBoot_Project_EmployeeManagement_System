@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private EmployeeDetailsImpl employeeDetailsImpl;
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {// //provide logic for Authentication and Authorization etc
         http
                 .sessionManagement()//for session management ie to delete cookies
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)//SessionCreationPolicy. STATELESS – Spring Security will never create a HttpSession and it will never use it to get the SecurityContext
@@ -43,12 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()//bridge to connect httpBasic()
                 .httpBasic();
-
-
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //provide logic for configuration Authentication info provider like InMemoryDB, DB s/w etc
         auth.userDetailsService(this.employeeDetailsImpl).passwordEncoder(passwordEncoder());
     }
     @Bean
